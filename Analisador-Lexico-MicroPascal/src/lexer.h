@@ -1,0 +1,26 @@
+#ifndef LEXER_H
+#define LEXER_H
+
+#define TOKEN_EOF                 "EOF"
+#define TOKEN_PALAVRA_RESERVADA   "PALAVRA_RESERVADA"
+#define TOKEN_IDENTIFICADOR       "IDENTIFICADOR"
+#define TOKEN_NUMERO_INTEIRO      "NUMERO_INTEIRO"
+#define TOKEN_NUMERO_REAL         "NUMERO_REAL"
+#define TOKEN_STRING              "STRING"
+#define TOKEN_OP_ARITMETICO       "OP_ARITMETICO"
+#define TOKEN_OP_ATRIBUICAO       "OP_ATRIBUICAO"
+#define TOKEN_DELIMITADOR         "DELIMITADOR"
+
+typedef struct {
+    char token[30];
+    char lexema[100];
+    int linha;
+    int coluna;
+} Token;
+
+void inicializar_lexer(const char *nome_arquivo);
+void fechar_lexer(void);
+Token proximo_token(void);
+int lexer_tem_erros(void);
+
+#endif
