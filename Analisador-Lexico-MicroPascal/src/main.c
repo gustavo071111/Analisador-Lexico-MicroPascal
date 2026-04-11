@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     printf("   Analisador Lexico MicroPascal\n");
     printf("=====================================\n");
     printf("Arquivo analisado : %s\n", nome_entrada);
-    printf("Status final      : %s\n", lexer_tem_erros() ? "ERROS ENCONTRADOS (Ver .err)" : "SUCESSO");
+    printf("Status final      : %s\n", lexer_tem_erros() ? "ERROS ENCONTRADOS (Ver no aquivo gerado '.err' na mesma pasta)" : "SUCESSO");
     printf("=====================================\n\n");
 
     fechar_lexer();
