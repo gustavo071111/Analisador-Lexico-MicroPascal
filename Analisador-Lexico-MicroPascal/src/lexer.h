@@ -1,21 +1,48 @@
-// lexer.h - Interface do analisador léxico
-// Define os tipos de token e as funções de análise
-
 #ifndef LEXER_H
 #define LEXER_H
 
-// Tipos de token reconhecidos
+// Tokens básicos
+#define TOKEN_ERRO "TOKEN_ERRO"
 #define TOKEN_EOF "EOF"
-#define TOKEN_PALAVRA_RESERVADA "PALAVRA_RESERVADA"
-#define TOKEN_IDENTIFICADOR "IDENTIFICADOR"
-#define TOKEN_NUMERO_INTEIRO "NUMERO_INTEIRO"
-#define TOKEN_NUMERO_REAL "NUMERO_REAL"
-#define TOKEN_STRING "STRING"
-#define TOKEN_OP_ARITMETICO "OP_ARITMETICO"
-#define TOKEN_OP_ATRIBUICAO "OP_ATRIBUICAO"
-#define TOKEN_DELIMITADOR "DELIMITADOR"
+#define TOKEN_ID "ID"
+#define TOKEN_NUM_INT "NUM_INT"
+#define TOKEN_NUM_REAL "NUM_REAL"
 
-// Estrutura que representa um token extraído
+// Palavras-chave
+#define TOKEN_KW_PROGRAM "KW_PROGRAM"
+#define TOKEN_KW_VAR "KW_VAR"
+#define TOKEN_KW_INTEGER "KW_INTEGER"
+#define TOKEN_KW_REAL "KW_REAL"
+#define TOKEN_KW_BEGIN "KW_BEGIN"
+#define TOKEN_KW_END "KW_END"
+#define TOKEN_KW_IF "KW_IF"
+#define TOKEN_KW_THEN "KW_THEN"
+#define TOKEN_KW_ELSE "KW_ELSE"
+#define TOKEN_KW_WHILE "KW_WHILE"
+#define TOKEN_KW_DO "KW_DO"
+
+// Operadores
+#define TOKEN_OP_EQ "OP_EQ"
+#define TOKEN_OP_NE "OP_NE"
+#define TOKEN_OP_LT "OP_LT"
+#define TOKEN_OP_LE "OP_LE"
+#define TOKEN_OP_GT "OP_GT"
+#define TOKEN_OP_GE "OP_GE"
+#define TOKEN_OP_AD "OP_AD"
+#define TOKEN_OP_MIN "OP_MIN"
+#define TOKEN_OP_MUL "OP_MUL"
+#define TOKEN_OP_DIV "OP_DIV"
+#define TOKEN_OP_ASS "OP_ASS"
+
+// Símbolos
+#define TOKEN_SMB_SEM "SMB_SEM"
+#define TOKEN_SMB_COM "SMB_COM"
+#define TOKEN_SMB_OPA "SMB_OPA"
+#define TOKEN_SMB_CPA "SMB_CPA"
+#define TOKEN_SMB_COL "SMB_COL"
+#define TOKEN_SMB_DOT "SMB_DOT"
+
+// Estrutura do token
 typedef struct {
   char token[30];
   char lexema[100];
@@ -23,16 +50,10 @@ typedef struct {
   int coluna;
 } Token;
 
-// Inicializa o lexer e carrega as palavras reservadas
+// Funções do lexer
 void inicializar_lexer(const char *nome_arquivo);
-
-// Fecha o arquivo fonte
 void fechar_lexer(void);
-
-// Retorna o próximo token do arquivo
 Token proximo_token(void);
-
-// Retorna 1 se houve algum erro léxico
 int lexer_tem_erros(void);
 
 #endif

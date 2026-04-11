@@ -29,7 +29,7 @@ digraph AnalisadorLexico {
     q8 -> q0 [label = "}"];
 
     // Loops e caminhos específicos
-    q1 -> q1 [label = "A\n1"];
+    q1 -> q1 [label = "A-Z\n0-1"];
     q2 -> q2 [label = "0-9"];
     q2 -> q3 [label = "."];
     q3 -> q4 [label = "0-9"];

@@ -10,5 +10,4 @@ begin
     resultado := a - b
   else
     resultado := b - a;
-  writeln(resultado);
 end.
