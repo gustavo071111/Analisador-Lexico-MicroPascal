@@ -74,49 +74,41 @@ Token proximo_token() {
 
             if (isspace(c)) continue;
 
-            // Transição para q1 (A-Z ou _)
             if (isalpha(c) || c == '_') {
                 estado = 1;
                 lexema[pos++] = c;
                 break;
             }
 
-            // Transição para q2 (0-9)
             if (isdigit(c)) {
                 estado = 2;
                 lexema[pos++] = c;
                 break;
             }
 
-            // Transição para q5 (:)
             if (c == ':') {
                 estado = 5;
                 break;
             }
 
-            // Transição para q6 (<)
             if (c == '<') {
                 estado = 6;
                 break;
             }
 
-            // Transição para q7 (>)
             if (c == '>') {
                 estado = 7;
                 break;
             }
 
-            // Transição para q8 ({)
             if (c == '{') {
                 estado = 8;
                 break;
             }
 
-            // Operadores Relacionais Diretos (=)
             if (c == '=')
                 return montar_token("OP_RELACIONAL", "=", l_ini, c_ini);
 
-            // Símbolos e Delimitadores Diretos do q0
             if (c == ';') return montar_token("SMB_SEM", ";", l_ini, c_ini);
             if (c == ',') return montar_token("SMB_COM", ",", l_ini, c_ini);
             if (c == '(') return montar_token("SMB_OPA", "(", l_ini, c_ini);
@@ -129,7 +121,6 @@ Token proximo_token() {
             if (strchr("+-*/", c))
                 return montar_token("OP_ARITMETICO", lexema, l_ini, c_ini);
 
-            // Erro Léxico (Caractere não reconhecido em q0)
             erros = 1;
             char msg_erro[100];
             sprintf(msg_erro, "caractere invalido '%c'", c); 
@@ -151,7 +142,7 @@ Token proximo_token() {
                 lexema[pos++] = c;
                 break;
             }
-            if (c == '.') { // Vai para q3 (Ponto encontrado)
+            if (c == '.') {
                 estado = 3;
                 lexema[pos++] = c;
                 break;
@@ -162,11 +153,10 @@ Token proximo_token() {
 
         case 3: // Estado q3 (Esperando dígitos após o ponto)
             if (isdigit(c)) {
-                estado = 4; // Vai para q4 (Estado final do Real)
+                estado = 4;
                 lexema[pos++] = c;
                 break;
             }
-            // Erro: Ponto sem dígito (ex: 10.) - Fiel ao autômato que exige dígito em q3
             erros = 1;
             lexema[pos] = '\0';
             char msg_num[100];
@@ -174,10 +164,21 @@ Token proximo_token() {
             devolver_char(c);
             return montar_token("TOKEN_ERRO", msg_num, l_ini, c_ini);
 
-        case 4: // Estado q4 (Dígitos adicionais do Real)
+        case 4: // Estado q4 (Dígitos adicionais ou Validação de Fim de Número)
             if (isdigit(c)) {
                 lexema[pos++] = c;
                 break;
+            }
+            // Se vier uma letra colada (ex: 10.7u), invalida o número inteiro
+            if (isalpha(c)) {
+                erros = 1;
+                lexema[pos++] = c;
+                while (isalnum(c = ler_char())) { if(pos < 99) lexema[pos++] = c; }
+                devolver_char(c);
+                lexema[pos] = '\0';
+                char msg_inv[100];
+                sprintf(msg_inv, "numero inexistente ou malformado '%s'", lexema);
+                return montar_token("TOKEN_ERRO", msg_inv, l_ini, c_ini);
             }
             devolver_char(c);
             lexema[pos] = '\0';
@@ -202,7 +203,7 @@ Token proximo_token() {
 
         case 8: // Estado q8 (Comentários { })
             if (c == '}') {
-                estado = 0; // Volta para q0
+                estado = 0;
                 break;
             }
             if (c == EOF) {

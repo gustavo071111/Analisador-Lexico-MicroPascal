@@ -3,7 +3,7 @@ program soma;
 var
   x, y, z : integer;
 begin
-  x := 10.6;
+  x := 10;
   y := 20; 
   z := x + y;
   writeln(z);
