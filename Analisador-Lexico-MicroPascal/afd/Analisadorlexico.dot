@@ -9,7 +9,7 @@ digraph AnalisadorLexico {
     
     // Definição dos nós de aceitação (círculo duplo)
     node [shape = doublecircle];
-    q1; q2; q4; q5; q6; q7;
+    q0;q1; q2; q4; q5; q6; q7;
 
     // Nós normais
     node [shape = circle];
