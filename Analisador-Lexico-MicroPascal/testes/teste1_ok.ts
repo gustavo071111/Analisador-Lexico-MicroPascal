@@ -1,5 +1,5 @@
-TABELA DE SÍMBOLOS - Arquivo: testes/teste1_ok.pas
------------------------------------------------------------
+TABELA DE SIMBOLOS - Arquivo: testes/teste1_ok.pas
+------------------------------------------
 
 --- TABELA DE SIMBOLOS ---
 [0] Lexema: program              | Tipo: PALAVRA_RESERVADA
@@ -17,10 +17,9 @@ TABELA DE SÍMBOLOS - Arquivo: testes/teste1_ok.pas
 [12] Lexema: write                | Tipo: PALAVRA_RESERVADA
 [13] Lexema: writeln              | Tipo: PALAVRA_RESERVADA
 [14] Lexema: read                 | Tipo: PALAVRA_RESERVADA
-[15] Lexema: soma                 | Tipo: IDENTIFICADOR
-[16] Lexema: x                    | Tipo: IDENTIFICADOR
-[17] Lexema: y                    | Tipo: IDENTIFICADOR
-[18] Lexema: z                    | Tipo: IDENTIFICADOR
-[19] Lexema: k                    | Tipo: IDENTIFICADOR
+[15] Lexema: soma                 | Tipo: ID
+[16] Lexema: x                    | Tipo: ID
+[17] Lexema: y                    | Tipo: ID
+[18] Lexema: z                    | Tipo: ID
 
-Total de símbolos únicos: 20
+Total de simbolos: 19

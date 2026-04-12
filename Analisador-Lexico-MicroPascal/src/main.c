@@ -1,5 +1,5 @@
-// main.c - Ponto de entrada do analisador léxico MicroPascal
-// Recebe o arquivo fonte e gera as saídas .lex, .ts e .err
+// main.c - Entrada do programa
+// Roda o lexer e gera os arquivos .lex, .ts e .err
 
 #include "lexer.h"
 #include "tabela_simbolos.h"
@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 
     const char *nome_entrada = argv[1];
 
+    // monta os nomes dos arquivos de saída trocando a extensão
     char nome_lex[512], nome_ts[512], nome_err[512];
 
     strncpy(nome_lex, nome_entrada, 500);
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
     ponto = strrchr(nome_err, '.');
     if (ponto) strcpy(ponto, ".err"); else strcat(nome_err, ".err");
 
+    // abre os arquivos de saída
     FILE *arq_lex = fopen(nome_lex, "w");
     FILE *arq_ts = fopen(nome_ts, "w");
     FILE *arq_err = fopen(nome_err, "w");
@@ -44,20 +46,21 @@ int main(int argc, char *argv[]) {
 
     inicializar_lexer(nome_entrada);
 
+    // lê todos os tokens até o fim do arquivo
     Token tok;
 
     do {
         tok = proximo_token();
 
-        // ERROS LÉXICOS
         if (strcmp(tok.token, TOKEN_ERRO) == 0) {
+            // erro léxico → grava no .err
             fprintf(arq_err,
                     "Erro lexico: %s linha %d coluna %d\n",
                     tok.lexema, tok.linha, tok.coluna);
         }
 
-        // TOKENS NORMAIS
         else if (strcmp(tok.token, TOKEN_EOF) != 0) {
+            // token válido → grava no .lex
             fprintf(arq_lex,
                     "<%s, %s> %d %d\n",
                     tok.token, tok.lexema,
@@ -66,13 +69,13 @@ int main(int argc, char *argv[]) {
 
     } while (strcmp(tok.token, TOKEN_EOF) != 0);
 
-    // TABELA DE SÍMBOLOS
+    // grava a tabela de símbolos no .ts
     fprintf(arq_ts, "TABELA DE SIMBOLOS - Arquivo: %s\n", nome_entrada);
     fprintf(arq_ts, "------------------------------------------\n");
     imprimir_tabela(arq_ts);
     fprintf(arq_ts, "\nTotal de simbolos: %d\n", total_simbolos());
 
-    // SAÍDA NO TERMINAL
+    // resumo no terminal
     printf("\n=====================================\n");
     printf(" Analisador Lexico MicroPascal\n");
     printf("=====================================\n");
