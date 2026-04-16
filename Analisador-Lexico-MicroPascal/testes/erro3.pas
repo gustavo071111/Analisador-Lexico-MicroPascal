@@ -4,6 +4,6 @@ var
   x : real;
 begin
   x := 10.;
-  x := 3.;
-  x := 99.;
+  x := 3.a;
+  x := 99..1;
 end.

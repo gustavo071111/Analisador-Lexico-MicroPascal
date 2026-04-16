@@ -4,6 +4,5 @@ var
   x : integer;
 begin
   x := 42;
-    { este comentario nunca fecha...}
-  writeln(x);
+  { este comentario nunca fecha...
 end.

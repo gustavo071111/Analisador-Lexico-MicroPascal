@@ -1,4 +1,4 @@
-{ Erro 1: Caracteres invalidos @ $ % }
+{ Teste de erros léxicos: @, $ e % }
 program erros;
 var
   x : integer;
