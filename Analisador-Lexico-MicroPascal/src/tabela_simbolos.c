@@ -13,7 +13,7 @@ static const char *reservadas[] = {
     "program", "var",  "begin", "end", "integer", "real",    "boolean", "if",
     "then",    "else", "while", "do",  "write",   "writeln", "read",    NULL};
 
-// converte pra minúscula (comparação case-insensitive)
+// converte pra minúscula 
 static void normalizar(const char *in, char *out) {
   int i;
   for (i = 0; in[i]; i++)

@@ -7,7 +7,7 @@
 
 #define MAX_SIMBOLOS 500 // limite de símbolos na tabela
 
-// Cada símbolo tem o texto (lexema) e seu tipo
+// Cada símbolo tem o texto e seu tipo
 typedef struct {
   char lexema[50];
   char tipo[30];

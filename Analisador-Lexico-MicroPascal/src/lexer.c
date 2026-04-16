@@ -100,7 +100,7 @@ Token proximo_token() {
             if (c == ':') { estado = 5; break; }
             if (c == '<') { estado = 6; break; }
             if (c == '>') { estado = 7; break; }
-            if (c == '{') { estado = 8; break; } // comentário
+            if (c == '{') { estado = 8; break; } 
 
             // tokens de um caractere só
             if (c == '=') return montar_token(TOKEN_OP_EQ, "=", l_ini, c_ini);
