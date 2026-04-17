@@ -51,7 +51,14 @@ Analisador-Lexico-MicroPascal/
 ### 1. Compilar
 
 ```bash
-gcc src/main.c src/lexer.c src/tabela_simbolos.c -o compilador
+
+# Entrar na pasta do projeto
+cd analisador-lexico-micropascal
+
+# Compilar
+gcc src/main.c src/lexer.c src/tabela_simbolos.c -o compilador.exe
+
+# Executar
 
 // Linux e Mac
 ./compilador testes/teste1_ok.pas
